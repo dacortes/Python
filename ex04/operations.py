@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 07:54:40 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/14 09:06:58 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/14 09:26:51 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ if len(sys.argv) == 3:
         if b == 0:
             print("Quotient:   ERROR (division by zero)")
             print("Remainder:  ERROR (modulo by zero)")
-            exit
         else :
             print("Quotient:  ",a / b)
             print("Remainder: ",a % b)

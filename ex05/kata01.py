@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:33:45 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/14 10:13:44 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/14 11:23:31 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,4 +16,8 @@ kata = {
 'Ruby': 'Yukihiro Matsumoto',
 'PHP': 'Rasmus Lerdorf',
 }
-print(kata)
+i = 0
+while i < len(kata):
+    key = list(kata.keys())[i]
+    print(key,"was created by",kata[key])
+    i += 1

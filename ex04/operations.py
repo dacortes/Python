@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 07:54:40 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/14 09:26:51 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/14 19:56:30 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,5 +28,8 @@ if len(sys.argv) == 3:
             print("Remainder: ",a % b)
     else :
         print("AssertionError: only integers")
-elif len(sys.argv) >= 3:
+elif len(sys.argv) > 3:
     print("AssertionError: too many arguments")
+else:
+    print("Usage: python operations.py <number1> <number2>")
+    print("Example:\n\tpython operations.py 10 3")

@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 09:33:45 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/14 11:23:31 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/14 17:16:30 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 kata = {
 'Python': 'Guido van Rossum',
 'Ruby': 'Yukihiro Matsumoto',
-'PHP': 'Rasmus Lerdorf',
+'PHP': 'Rasmus Lerdorf'
 }
 i = 0
 while i < len(kata):

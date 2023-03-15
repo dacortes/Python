@@ -6,11 +6,10 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/15 11:59:15 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/15 16:48:37 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/15 19:33:09 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#class test
 class Recipe:
     #method to check the arguments
     def check(self, arg ,type):

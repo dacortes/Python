@@ -6,10 +6,11 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/21 15:09:19 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/21 15:29:13 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+from termcolor import colored
 import pandas as pd
 import json
 import numpy as np
@@ -38,7 +39,7 @@ def analyze_key(df, article):
 
 def analyze_score(socore, type):
 
-    if socore < 0.25 and type == 'keywords':
+    if socore < 0.27 and type == 'keywords':
         print("False")
         return (False)
     elif socore < 1.2 and type == 'title':
@@ -67,8 +68,7 @@ def analyze_keywords(df_video):
         article = df_article['keywords'][in_article[i]]
         article = ' '.join(df_article['keywords'][i])
         scores = score_key(df_video, article)
-        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n")
-        print(scores)
+        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n{scores}")
         i += 1
 
 def analyze_title(df_video):
@@ -76,8 +76,7 @@ def analyze_title(df_video):
     while i < len(in_article):
         article = df_article['title'][in_article[i]]
         scores = score_key(df_video, article)
-        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n")
-        print(scores)
+        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n{scores}")
         i += 1
     
 '''.................................. Vars ..................................'''
@@ -95,23 +94,9 @@ if __name__ == "__main__":
 ###............................... Index.json ...............................###
     in_video = df_video.index
     in_article = df_article.index
-    print(f"las row :{df_article.shape[0]}")
-    print(range(len(df_video)))
-    print(len(in_article))
-    analyze_keywords(df_video)
+    print(colored(f"la cantidad de articulos para analizar es:", "blue") +
+          f" {df_article.shape[0]}")
+    print(colored(f"videos con los que se pueden relacionar:", "blue") +
+          f" {df_video.shape[0]}")
 ###............................... Score ....................................###
-'''i = 0
-   while i < 12 :
-        article = df_article['keywords'][in_article[i]]
-        article = ' '.join(df_article['keywords'][i])
-        scores = analyze_key(df_video, article)
-        sc1 = scores[0][0]
-        sc2 = scores[1][0]
-        id1 = scores[0][1]
-        id2 = scores[1][1]
-        id3 = scores[2][1]
-        print("Analicis")
-        print("videos que dieron resultado true :",in_video[id1], in_video[id2], in_video[id3])
-        print("articulo analizado :",in_article[i])
-        print(scores)
-        i += 1'''
+    #analyze_keywords(df_video)

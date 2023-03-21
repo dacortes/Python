@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/21 15:29:13 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/21 16:10:36 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,14 @@ def analyze_key(df, article):
     scores.sort(reverse=True)
     return (scores)
 
-def analyze_score(socore, type):
-
-    if socore < 0.27 and type == 'keywords':
-        print("False")
-        return (False)
-    elif socore < 1.2 and type == 'title':
-        print("False")
+def analyze_score(socore, video):
+    if socore < 0.27:
+        print( f"id: {in_video[video]} status:" + colored(" False", "red")
+              + colored("\nvalue:","blue") + f"{socore}")
         return (False)
     else :
-        print("True")
+        print( f"id: {in_video[video]} status:" + colored(" True", "green")
+              + colored("\nvalue:","blue") + f"{socore}")
         return (True)
 
 def score_key(df, article):
@@ -64,12 +62,24 @@ def score_key(df, article):
 
 def analyze_keywords(df_video):
     i = 0
+    num = 1
+    tittle = colored("Analisis por keywords", attrs=["bold"])
+    print("............ "+ colored(tittle, "blue") + " ............")
     while i < len(in_article):
         article = df_article['keywords'][in_article[i]]
         article = ' '.join(df_article['keywords'][i])
         scores = score_key(df_video, article)
-        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n{scores}")
+        print(colored("Numero de articulo:","blue") + f" {num}\nid: {in_article[i]}")
+        v1 = scores[0][0]
+        id1 = scores[0][1]
+        v2 = scores[1][0]
+        id2 = scores[1][1]
+        tittle = colored("Analisis del score", attrs=["bold"])
+        print("=====>"+ colored(tittle, "blue"))
+        analyze_score(v1, id1)
+        analyze_score(v2, id2)
         i += 1
+        num += 1
 
 def analyze_title(df_video):
     i = 0
@@ -99,4 +109,4 @@ if __name__ == "__main__":
     print(colored(f"videos con los que se pueden relacionar:", "blue") +
           f" {df_video.shape[0]}")
 ###............................... Score ....................................###
-    #analyze_keywords(df_video)
+    analyze_keywords(df_video)

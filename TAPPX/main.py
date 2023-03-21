@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/21 15:00:22 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/21 15:04:33 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,19 +31,45 @@ def analyze_key(df, article):
         video = ' '.join(df['keywords'][i])
         m_video = model.encode(video)
         m_article = model.encode(article)
-        res = np.dot(m_video, m_article)/(np.linalg.norm(m_video)*np.linalg.norm(m_article))
-        scores.append((res, i, df['categoriaIAB'][i][0]['class']))
+        res = np.dot(m_article, m_video)/(np.linalg.norm(m_article)*np.linalg.norm(m_video))
+        scores.append((res, i, df_video.index[i]))
     scores.sort(reverse=True)
     return (scores)
 
-def analyze_score(socore):
+def analyze_score(socore, type):
 
-    if socore < 0.25:
+    if socore < 0.25 and type == 'keywords':
+        print("False")
+        return (False)
+    elif socore < 1.2 and type == 'title':
         print("False")
         return (False)
     else :
         print("True")
         return (True)
+
+def score_key(df, article):
+    scores = []
+    i = 0
+    while i < len(in_video):
+        video = ' '.join(df['keywords'][i])
+        m_video = model.encode(video)
+        m_article = model.encode(article)
+        res = np.dot(m_article, m_video)/(np.linalg.norm(m_article)*np.linalg.norm(m_video))
+        scores.append((res, i, df_video.index[i]))
+        i += 1
+    scores.sort(reverse=True)
+    return (scores)
+
+def analyze_everything(df_video):
+    i = 0
+    while i < len(in_article):
+        article = df_article['keywords'][in_article[i]]
+        scores = score_key(df_video, article)
+        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n")
+        print(scores)
+        i += 1
+        
     
 '''.................................. Vars ..................................'''
 
@@ -59,21 +85,23 @@ if __name__ == "__main__":
 ###............................... Index.json ...............................###
     in_video = df_video.index
     in_article = df_article.index
-    article = df_article['text'][in_article[0]]
+    print(f"las row :{df_article.shape[0]}")
+    print(range(len(df_video)))
+    print(len(in_article))
+    #analyze_everything(df_video)
 ###............................... Score ....................................###
-    scores = analyze_key(df_video, article)
-    sc1 = scores[0][0]
-    sc2 = scores[1][0]
-    analyze_score (sc1)
-    id1 = scores[0][1]
-    id2 = scores[1][1]
-    id3 = scores[2][1]
-    print("Analicis")
-    print("videos que dieron resultado true :",in_video[id1], in_video[id2], in_video[id3])
-    print("articulo analizado :",in_article[0])
-    print(scores)
-###............................... Test .....................................###
-''' out_video = extract_info(df_video, in_video[0], 'text')
-    out_article = extract_info(df_article, in_article[0], 'text')
-    print("id :",in_video[0], "\ncontent :\n",out_video)
-    print("id :",in_article[0], "\ncontent :\n",out_article)'''
+    i = 0
+'''    while i < 12 :
+        article = df_article['keywords'][in_article[i]]
+        article = ' '.join(df_article['keywords'][i])
+        scores = analyze_key(df_video, article)
+        sc1 = scores[0][0]
+        sc2 = scores[1][0]
+        id1 = scores[0][1]
+        id2 = scores[1][1]
+        id3 = scores[2][1]
+        print("Analicis")
+        print("videos que dieron resultado true :",in_video[id1], in_video[id2], in_video[id3])
+        print("articulo analizado :",in_article[i])
+        print(scores)
+        i += 1'''

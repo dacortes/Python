@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/21 15:04:33 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/21 15:09:19 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,21 +61,31 @@ def score_key(df, article):
     scores.sort(reverse=True)
     return (scores)
 
-def analyze_everything(df_video):
+def analyze_keywords(df_video):
     i = 0
     while i < len(in_article):
         article = df_article['keywords'][in_article[i]]
+        article = ' '.join(df_article['keywords'][i])
         scores = score_key(df_video, article)
         print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n")
         print(scores)
         i += 1
-        
+
+def analyze_title(df_video):
+    i = 0
+    while i < len(in_article):
+        article = df_article['title'][in_article[i]]
+        scores = score_key(df_video, article)
+        print(f"El articulo #:\n{i}\nid:\n{in_article[i]}\nscores:\n")
+        print(scores)
+        i += 1
     
 '''.................................. Vars ..................................'''
 
 model = SentenceTransformer('sentence-transformers/distiluse-base-multilingual-cased-v1')
 
 '''.................................. Main ..................................'''
+
 if __name__ == "__main__":
 ###............................... Read.json ................................###
     df_video = read_json('videos.json')
@@ -88,10 +98,10 @@ if __name__ == "__main__":
     print(f"las row :{df_article.shape[0]}")
     print(range(len(df_video)))
     print(len(in_article))
-    #analyze_everything(df_video)
+    analyze_keywords(df_video)
 ###............................... Score ....................................###
-    i = 0
-'''    while i < 12 :
+'''i = 0
+   while i < 12 :
         article = df_article['keywords'][in_article[i]]
         article = ' '.join(df_article['keywords'][i])
         scores = analyze_key(df_video, article)

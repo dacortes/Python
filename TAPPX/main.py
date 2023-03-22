@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 12:48:18 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 15:48:34 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ def analyze_key(df, article):
 def analyze_score(socore, video):
     if socore < 0.27:
         print( f"id: {in_video[video]} status:" + colored(" False", "red")
-              + colored("\nvalue:","blue") + f"{socore}")
+              + colored("\nvalue:","blue") + f" {socore}")
         return (False)
     else :
         print( f"id: {in_video[video]} status:" + colored(" True", "green")
@@ -83,9 +83,9 @@ def analyze_keywords(df_video):
         article = ' '.join(df_article['keywords'][i])
         scores = score_key(df_video, article)
         print(colored("Numero de articulo:","blue") + f" {num}\nid: {in_article[i]}")
-        v1 = scores[0][0]
+        v1 = round((scores[0][0] * 10), 1)
         id1 = scores[0][1]
-        v2 = scores[1][0]
+        v2 = round((scores[1][0] * 10), 1)
         id2 = scores[1][1]
         tittle = colored("Analisis del score", attrs=["bold"])
         print("=====>"+ colored(tittle, "blue"))
@@ -94,7 +94,6 @@ def analyze_keywords(df_video):
         push_dic(dic_outut, in_article[i])
         push_dic_dic(dic_outut, in_article[i], in_video[id1], str(v1))
         push_dic_dic(dic_outut, in_article[i], in_video[id2], str(v2))
-        #print(dic_outut)
         i += 1
         num += 1
 

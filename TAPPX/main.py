@@ -6,9 +6,11 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 12:46:01 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 12:48:18 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+'''.................................. libraries .............................'''
 
 from termcolor import colored
 import pandas as pd

@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 17:26:26 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 19:12:37 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 19:18:14 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,7 +149,7 @@ def analyze_text(df_video):
 ###...............................  in_test .................................###
 
 def analyze_score(socore, video):
-    if socore < 0.27:
+    if socore < 0.33:
         #print( f"id: {in_video[video]} status:" + colored(" False", "red")
         #      + colored("\nvalue:","blue") + f" {socore}")
         return (False)

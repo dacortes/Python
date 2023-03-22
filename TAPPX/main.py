@@ -6,13 +6,14 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 15:48:34 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 15:55:21 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 '''.................................. libraries .............................'''
 
 from termcolor import colored
+from tqdm import tqdm
 import pandas as pd
 import json
 import numpy as np
@@ -41,12 +42,12 @@ def analyze_key(df, article):
 
 def analyze_score(socore, video):
     if socore < 0.27:
-        print( f"id: {in_video[video]} status:" + colored(" False", "red")
-              + colored("\nvalue:","blue") + f" {socore}")
+        #print( f"id: {in_video[video]} status:" + colored(" False", "red")
+        #      + colored("\nvalue:","blue") + f" {socore}")
         return (False)
     else :
-        print( f"id: {in_video[video]} status:" + colored(" True", "green")
-              + colored("\nvalue:","blue") + f"{socore}")
+        #print( f"id: {in_video[video]} status:" + colored(" True", "green")
+        #     + colored("\nvalue:","blue") + f"{socore}")
         return (True)
 
 def score_key(df, article):
@@ -78,17 +79,18 @@ def analyze_keywords(df_video):
     num = 1
     tittle = colored("Analisis por keywords", attrs=["bold"])
     print("............ "+ colored(tittle, "blue") + " ............")
+    pbar = tqdm(total=len(in_article))
     while i < len(in_article):
         article = df_article['keywords'][in_article[i]]
         article = ' '.join(df_article['keywords'][i])
         scores = score_key(df_video, article)
-        print(colored("Numero de articulo:","blue") + f" {num}\nid: {in_article[i]}")
+        #print(colored("Numero de articulo:","blue") + f" {num}\nid: {in_article[i]}")
         v1 = round((scores[0][0] * 10), 1)
         id1 = scores[0][1]
         v2 = round((scores[1][0] * 10), 1)
         id2 = scores[1][1]
         tittle = colored("Analisis del score", attrs=["bold"])
-        print("=====>"+ colored(tittle, "blue"))
+        #print("=====>"+ colored(tittle, "blue"))
         analyze_score(v1, id1)
         analyze_score(v2, id2)
         push_dic(dic_outut, in_article[i])
@@ -96,6 +98,8 @@ def analyze_keywords(df_video):
         push_dic_dic(dic_outut, in_article[i], in_video[id2], str(v2))
         i += 1
         num += 1
+        pbar.update(1)
+    pbar.close()
 
 def analyze_title(df_video):
     i = 0
@@ -127,6 +131,5 @@ if __name__ == "__main__":
           f" {df_video.shape[0]}")
 ###............................... Score ....................................###
     analyze_keywords(df_video)
-    #print(dic_outut)
     with open('data.json', 'w') as file:
         json.dump(dic_outut, file, indent=2)

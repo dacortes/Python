@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 15:55:21 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 16:08:44 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,8 @@ def analyze_keywords(df_video):
     i = 0
     num = 1
     tittle = colored("Analisis por keywords", attrs=["bold"])
-    print("............ "+ colored(tittle, "blue") + " ............")
+    #print("............ "+ colored(tittle, "blue") + " ............")
+    print(colored(f"\n\t\t\t{tittle}", "blue"))
     pbar = tqdm(total=len(in_article))
     while i < len(in_article):
         article = df_article['keywords'][in_article[i]]
@@ -100,6 +101,7 @@ def analyze_keywords(df_video):
         num += 1
         pbar.update(1)
     pbar.close()
+    print(colored("\t\t\tAnalisis finalizado","green"))
 
 def analyze_title(df_video):
     i = 0
@@ -125,7 +127,7 @@ if __name__ == "__main__":
     dic_outut = {}
     in_video = df_video.index
     in_article = df_article.index
-    print(colored(f"la cantidad de articulos para analizar es:", "blue") +
+    print(colored(f"\nla cantidad de articulos para analizar es:", "blue") +
           f" {df_article.shape[0]}")
     print(colored(f"videos con los que se pueden relacionar:", "blue") +
           f" {df_video.shape[0]}")

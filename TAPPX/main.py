@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 11:58:55 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 12:46:01 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,9 +90,9 @@ def analyze_keywords(df_video):
         analyze_score(v1, id1)
         analyze_score(v2, id2)
         push_dic(dic_outut, in_article[i])
-        push_dic_dic(dic_outut, in_article[i], in_video[id1], v1)
-        push_dic_dic(dic_outut, in_article[i], in_video[id2], v2)
-        print(dic_outut)
+        push_dic_dic(dic_outut, in_article[i], in_video[id1], str(v1))
+        push_dic_dic(dic_outut, in_article[i], in_video[id2], str(v2))
+        #print(dic_outut)
         i += 1
         num += 1
 
@@ -126,3 +126,6 @@ if __name__ == "__main__":
           f" {df_video.shape[0]}")
 ###............................... Score ....................................###
     analyze_keywords(df_video)
+    #print(dic_outut)
+    with open('data.json', 'w') as file:
+        json.dump(dic_outut, file, indent=2)

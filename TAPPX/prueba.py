@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/22 17:26:26 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/22 18:20:55 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 19:12:37 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,8 @@ def score_text(df, article):
     scores = []
     i = 0
     while i < len(in_video):
-        video = ' '.join(search_keywords(df['text'][i]))
+        tmp_video = ' '.join(search_keywords(df['text'][i]))
+        video = tmp_video + ' '.join(df['keywords'][i])
         m_video = model.encode(video)
         m_article = model.encode(article)
         res = np.dot(m_article, m_video)/(np.linalg.norm(m_article)*np.linalg.norm(m_video))
@@ -124,7 +125,8 @@ def analyze_text(df_video):
     print(colored(f"\n\t\t\t{tittle}", "blue"))
     pbar = tqdm(total=len(in_article))
     while i < len(in_article):
-        article = ' '.join(search_keywords(df_article['text'][in_article[i]]))
+        tmp_article = ' '.join(search_keywords(df_article['text'][in_article[i]]))
+        article = tmp_article + ' '.join(df_article['keywords'][i])
         scores = score_text(df_video, article)
         #print(colored("Numero de articulo:","blue") + f" {num}\nid: {in_article[i]}")
         v1 = round((scores[0][0] * 10), 1)
@@ -178,7 +180,6 @@ if __name__ == "__main__":
     print(colored(f"videos con los que se pueden relacionar:", "blue") +
           f" {df_video.shape[0]}")
 ###............................... Score ....................................###
-    #analyze_keywords(df_video)
     analyze_text(df_video)
     with open('data1.json', 'w') as file:
         json.dump(dic_outut, file, indent=2)

@@ -6,7 +6,7 @@
 #    By: dacortes <dacortes@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 15:00:20 by dacortes          #+#    #+#              #
-#    Updated: 2023/03/21 16:10:36 by dacortes         ###   ########.fr        #
+#    Updated: 2023/03/22 11:58:55 by dacortes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,17 @@ def score_key(df, article):
     scores.sort(reverse=True)
     return (scores)
 
+def push_dic_dic(dic, id_article, id_video, score):
+    if id_article not in dic:
+        dic[id_article] = {}
+    if id_video not in dic[id_article]:
+        dic[id_article][id_video] = {}
+    dic[id_article][id_video]['score'] = score  
+
+def push_dic(dic, id_article):
+    dic[id_article] = {}
+
+
 def analyze_keywords(df_video):
     i = 0
     num = 1
@@ -78,6 +89,10 @@ def analyze_keywords(df_video):
         print("=====>"+ colored(tittle, "blue"))
         analyze_score(v1, id1)
         analyze_score(v2, id2)
+        push_dic(dic_outut, in_article[i])
+        push_dic_dic(dic_outut, in_article[i], in_video[id1], v1)
+        push_dic_dic(dic_outut, in_article[i], in_video[id2], v2)
+        print(dic_outut)
         i += 1
         num += 1
 
@@ -102,6 +117,7 @@ if __name__ == "__main__":
     df_video = pd.DataFrame.from_dict(df_video, orient='index')
     df_article = pd.DataFrame.from_dict(df_article, orient='index')
 ###............................... Index.json ...............................###
+    dic_outut = {}
     in_video = df_video.index
     in_article = df_article.index
     print(colored(f"la cantidad de articulos para analizar es:", "blue") +
